@@ -3,10 +3,15 @@
 # throughout this file
 import pygame
 from constants import *
+from player import *
 
 def main():
     pygame.init()
-    black = (0,0,0)
+    clock = pygame.time.Clock()
+    dt = 0
+    # This line INSTANTIATES the Player class
+    # It creates an actual Player object and stores it in the variable 'player'
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     print("Starting Asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
@@ -15,7 +20,9 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        pygame.Surface.fill(screen, black)
+        screen.fill("black")
+        player.draw(screen)
+        dt = clock.tick(60)/1000
         pygame.display.flip()
 
 
