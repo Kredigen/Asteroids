@@ -9,6 +9,9 @@ def main():
     pygame.init()
     clock = pygame.time.Clock()
     dt = 0
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers =(updatable, drawable)
     # This line INSTANTIATES the Player class
     # It creates an actual Player object and stores it in the variable 'player'
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
@@ -21,7 +24,9 @@ def main():
             if event.type == pygame.QUIT:
                 return
         screen.fill("black")
-        player.draw(screen)
+        for draws in drawable:
+            draws.draw(screen)
+        updatable.update(dt)
         dt = clock.tick(60)/1000
         pygame.display.flip()
 
